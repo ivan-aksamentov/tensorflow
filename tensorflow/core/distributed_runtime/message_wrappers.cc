@@ -495,6 +495,7 @@ CostGraphDef* InMemoryRunGraphResponse::mutable_cost_graph() {
 
 RunGraphResponse* InMemoryRunGraphResponse::get_proto() {
   LOG(FATAL) << "Cannot get a mutable protobuf for an InMemoryRunGraphResponse";
+  return nullptr;
 }
 
 size_t OwnedProtoRunGraphResponse::num_recvs() const {
