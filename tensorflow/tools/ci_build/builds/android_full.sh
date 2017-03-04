@@ -70,4 +70,18 @@ cp bazel-bin/tensorflow/examples/android/tensorflow_demo.apk \
 if [ -z "$NDK_ROOT" ]; then
    export NDK_ROOT=${ANDROID_NDK_HOME}
 fi
+
+echo "========== Benchmark Makefile Build Test =========="
 tensorflow/contrib/makefile/build_all_android.sh
+
+echo "========== Inference Makefile Build Test =========="
+tensorflow/contrib/makefile/build_all_android.sh \
+-s $(pwd)/tensorflow/contrib/makefile/sub_makefiles/android_inference/Makefile.in \
+-t libtensorflow_inference.so
+
+# Test Makefile build for tensorflow runtime with hexagon.
+# -b ... build only, -p ... use prebuilt binaries
+# This uses prebuilt binaries for hexagon dependencies because Building
+# hexagon binaries from source code requires qualcomm sdk.
+echo "========== Hexagon Build Test =========="
+tensorflow/contrib/makefile/samples/build_and_run_inception_hexagon.sh -bp
