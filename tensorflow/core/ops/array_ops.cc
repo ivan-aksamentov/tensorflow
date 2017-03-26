@@ -4939,19 +4939,7 @@ REGISTER_OP("FakeQuantWithMinMaxVarsGradient")
       c->set_output(2, min_max);
       return Status::OK();
     })
-    .Doc(R"doc(
-Compute gradients for a FakeQuantWithMinMaxVars operation.
-
-gradients: Backpropagated gradients above the FakeQuantWithMinMaxVars operation.
-inputs: Values passed as inputs to the FakeQuantWithMinMaxVars operation.
-min, max: Quantization interval, scalar floats.
-backprops_wrt_input: Backpropagated gradients w.r.t. inputs:
-  `gradients * (inputs >= min && inputs <= max)`.
-backprop_wrt_min: Backpropagated gradients w.r.t. min parameter:
-  `sum(gradients * (inputs < min))`.
-backprop_wrt_max: Backpropagated gradients w.r.t. max parameter:
-  `sum(gradients * (inputs > max))`.
-)doc");
+    .Doc(R"doc()doc");
 
 REGISTER_OP("FakeQuantWithMinMaxVarsPerChannel")
     .Input("inputs: float")
