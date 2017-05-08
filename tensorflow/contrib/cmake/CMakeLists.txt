@@ -101,10 +101,11 @@ if (tensorflow_ENABLE_JEMALLOC_SUPPORT)
 endif()
 
 # External dependencies
-include(zlib)
-include(gif)
-include(png)
-include(jpeg)
+find_package(GIF REQUIRED)
+find_package(JPEG REQUIRED)
+find_package(PNG REQUIRED)
+find_package(ZLIB REQUIRED)
+
 include(eigen)
 include(gemmlowp)
 include(jsoncpp)
@@ -117,10 +118,10 @@ if (tensorflow_BUILD_CC_TESTS)
 endif()
 
 set(tensorflow_EXTERNAL_LIBRARIES
-    ${zlib_STATIC_LIBRARIES}
-    ${gif_STATIC_LIBRARIES}
-    ${png_STATIC_LIBRARIES}
-    ${jpeg_STATIC_LIBRARIES}
+    ${ZLIB_LIBRARIES}
+    ${GIF_LIBRARIES}
+    ${PNG_LIBRARIES}
+    ${JPEG_LIBRARIES}
     ${jsoncpp_STATIC_LIBRARIES}
     ${farmhash_STATIC_LIBRARIES}
     ${fft2d_STATIC_LIBRARIES}
@@ -128,10 +129,6 @@ set(tensorflow_EXTERNAL_LIBRARIES
     ${protobuf_STATIC_LIBRARIES}
 )
 set(tensorflow_EXTERNAL_DEPENDENCIES
-    zlib_copy_headers_to_destination
-    gif_copy_headers_to_destination
-    png_copy_headers_to_destination
-    jpeg_copy_headers_to_destination
     jsoncpp
     farmhash_copy_headers_to_destination
     highwayhash_copy_headers_to_destination
@@ -146,10 +143,10 @@ include_directories(
     ${tensorflow_source_dir}
     ${CMAKE_CURRENT_BINARY_DIR}
     # External dependencies.
-    ${zlib_INCLUDE_DIR}
-    ${gif_INCLUDE_DIR}
-    ${png_INCLUDE_DIR}
-    ${jpeg_INCLUDE_DIR}
+    ${ZLIB_INCLUDE_DIR}
+    ${GIF_INCLUDE_DIR}
+    ${PNG_INCLUDE_DIR}
+    ${JPEG_INCLUDE_DIR}
     ${eigen_INCLUDE_DIRS}
     ${gemmlowp_INCLUDE_DIR}
     ${jsoncpp_INCLUDE_DIR}
