@@ -4,6 +4,13 @@ cmake_minimum_required(VERSION 3.5)
 # Project
 project(tensorflow C CXX)
 
+set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
+find_package(GIF REQUIRED)
+find_package(JPEG REQUIRED)
+find_package(PNG REQUIRED)
+find_package(ZLIB REQUIRED)
+
+
 # Set C++14 as standard for the whole project
 set(CMAKE_CXX_STANDARD 14)
 
@@ -101,14 +108,8 @@ if (tensorflow_ENABLE_JEMALLOC_SUPPORT)
 endif()
 
 # External dependencies
-find_package(GIF REQUIRED)
-find_package(JPEG REQUIRED)
-find_package(PNG REQUIRED)
-find_package(ZLIB REQUIRED)
-
 include(eigen)
 include(gemmlowp)
-include(jsoncpp)
 include(farmhash)
 include(fft2d)
 include(highwayhash)
@@ -122,14 +123,13 @@ set(tensorflow_EXTERNAL_LIBRARIES
     ${GIF_LIBRARIES}
     ${PNG_LIBRARIES}
     ${JPEG_LIBRARIES}
-    ${jsoncpp_STATIC_LIBRARIES}
+    ${JsonCpp_LIBRARIES}
     ${farmhash_STATIC_LIBRARIES}
     ${fft2d_STATIC_LIBRARIES}
     ${highwayhash_STATIC_LIBRARIES}
     ${protobuf_STATIC_LIBRARIES}
 )
 set(tensorflow_EXTERNAL_DEPENDENCIES
-    jsoncpp
     farmhash_copy_headers_to_destination
     highwayhash_copy_headers_to_destination
     protobuf
@@ -149,7 +149,7 @@ include_directories(
     ${JPEG_INCLUDE_DIR}
     ${eigen_INCLUDE_DIRS}
     ${gemmlowp_INCLUDE_DIR}
-    ${jsoncpp_INCLUDE_DIR}
+    ${JsonCpp_INCLUDE_DIRS}
     ${farmhash_INCLUDE_DIR}
     ${highwayhash_INCLUDE_DIR}
     ${PROTOBUF_INCLUDE_DIRS}
